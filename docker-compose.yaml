@@ -1,0 +1,19 @@
+# version: "3.9"
+services:
+  mongodb:
+    image: mongo:5.0.8
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    restart: always
+  api:
+    build:
+      context: .
+    ports:
+      - 5000:5000
+    restart: always
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/app
